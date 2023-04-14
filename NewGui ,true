@@ -1,0 +1,56 @@
+COREGUI = game:GetService("CoreGui")
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "  "Laenay"
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Name = "Main"
+frame.Size = UDim2.new(0, 200, 0, 200)
+frame.Position = UDim2.new(0.5, -100, 0, 50)
+frame.BackgroundTransparency = 0.5
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.Draggable = true
+frame.Parent = gui
+
+local commandLabels = {}
+
+local commands = {
+    { name = "Teleport to Spawn", command = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.SpawnLocation.CFrame
+    end },
+    { name = "Kill Yourself", command = function()
+        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    end },
+    { name = "Print Hello World", command = function()
+        print("Hello World!")
+    end },
+}
+
+for i, commandData in ipairs(commands) do
+    local label = Instance.new("TextLabel")
+    label.Name = "Command" .. tostring(i)
+    label.Size = UDim2.new(0, 180, 0, 20)
+    label.Position = UDim2.new(0, 10, 0, 10 + (i - 1) * 30)
+    label.BackgroundTransparency = 1
+    label.TextColor3 = Color3.new(1, 1, 1)
+    label.Text = commandData.name
+    label.Font = Enum.Font.SourceSans
+    label.TextSize = 14
+    label.TextWrapped = true
+    label.Parent = frame
+    
+    table.insert(commandLabels, { label = label, command = commandData.command })
+end
+
+for _, data in ipairs(commandLabels) do
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 180, 0, 20)
+    button.Position = data.label.Position
+    button.Text = ""
+    button.Parent = frame
+    
+    button.MouseButton1Click:Connect(function()
+        data.command()
+    end)
+end
