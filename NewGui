@@ -1,56 +1,79 @@
 COREGUI = game:GetService("CoreGui")
 
-local gui = Instance.new("ScreenGui")
-gui.Name = "  "Laenay"
-gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+-- GUI Settings
+local GUIWidth = 200
+local GUIHeight = 300
+local GUIPadding = 10
+local GUIBackgroundColor = Color3.fromRGB(255, 255, 255)
+local GUITextColor = Color3.fromRGB(0, 0, 0)
+local GUIBorderColor = Color3.fromRGB(0, 0, 0)
+local GUITitle = "Commands"
 
-local frame = Instance.new("Frame")
-frame.Name = "Main"
-frame.Size = UDim2.new(0, 200, 0, 200)
-frame.Position = UDim2.new(0.5, -100, 0, 50)
-frame.BackgroundTransparency = 0.5
-frame.BackgroundColor3 = Color3.new(0, 0, 0)
-frame.Draggable = true
-frame.Parent = gui
+-- GUI Creation
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
 
-local commandLabels = {}
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = player.PlayerGui
+ScreenGui.ResetOnSpawn = false
 
-local commands = {
-    { name = "Teleport to Spawn", command = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.SpawnLocation.CFrame
-    end },
-    { name = "Kill Yourself", command = function()
-        game.Players.LocalPlayer.Character.Humanoid.Health = 0
-    end },
-    { name = "Print Hello World", command = function()
-        print("Hello World!")
-    end },
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, GUIWidth, 0, GUIHeight)
+Frame.BackgroundColor3 = GUIBackgroundColor
+Frame.BorderColor3 = GUIBorderColor
+Frame.Position = UDim2.new(0.5, -GUIWidth / 2, 0.5, -GUIHeight / 2)
+Frame.Draggable = true
+Frame.Active = true
+Frame.Parent = ScreenGui
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.BackgroundColor3 = GUIBackgroundColor
+Title.TextColor3 = GUITextColor
+Title.Text = GUITitle
+Title.Font = Enum.Font.SourceSansBold
+Title.FontSize = Enum.FontSize.Size18
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Parent = Frame
+
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 20, 0, 20)
+CloseButton.Position = UDim2.new(1, -25, 0, 5)
+CloseButton.BackgroundColor3 = GUIBackgroundColor
+CloseButton.TextColor3 = GUITextColor
+CloseButton.Text = "X"
+CloseButton.Font = Enum.Font.SourceSansBold
+CloseButton.FontSize = Enum.FontSize.Size18
+CloseButton.Parent = Title
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Size = UDim2.new(0, 20, 0, 20)
+MinimizeButton.Position = UDim2.new(1, -50, 0, 5)
+MinimizeButton.BackgroundColor3 = GUIBackgroundColor
+MinimizeButton.TextColor3 = GUITextColor
+MinimizeButton.Text = "-"
+MinimizeButton.Font = Enum.Font.SourceSansBold
+MinimizeButton.FontSize = Enum.FontSize.Size18
+MinimizeButton.Parent = Title
+MinimizeButton.MouseButton1Click:Connect(function()
+    if Frame.Size == UDim2.new(0, GUIWidth, 0, GUIHeight) then
+        Frame.Size = UDim2.new(0, GUIWidth, 0, Title.Size.Y.Offset)
+    else
+        Frame.Size = UDim2.new(0, GUIWidth, 0, GUIHeight)
+    end
+end)
+
+local Commands = {
+    {"!kill", "Kills your character."},
+    {"!reset", "Resets your character."},
+    {"!respawn", "Respawns your character."},
 }
 
-for i, commandData in ipairs(commands) do
-    local label = Instance.new("TextLabel")
-    label.Name = "Command" .. tostring(i)
-    label.Size = UDim2.new(0, 180, 0, 20)
-    label.Position = UDim2.new(0, 10, 0, 10 + (i - 1) * 30)
-    label.BackgroundTransparency = 1
-    label.TextColor3 = Color3.new(1, 1, 1)
-    label.Text = commandData.name
-    label.Font = Enum.Font.SourceSans
-    label.TextSize = 14
-    label.TextWrapped = true
-    label.Parent = frame
-    
-    table.insert(commandLabels, { label = label, command = commandData.command })
-end
-
-for _, data in ipairs(commandLabels) do
-    local button = Instance.new("TextButton")
-    button.Size = UDim2.new(0, 180, 0, 20)
-    button.Position = data.label.Position
-    button.Text = ""
-    button.Parent = frame
-    
-    button.MouseButton1Click:Connect(function()
-        data.command()
-    end)
-end
+local CommandList = Instance.new("Frame")
+CommandList.Size = UDim2.new(1, -2 * GUIPadding, 1, -GUIPadding - Title.Size.Y.Offset - GUIPadding)
+CommandList.BackgroundColor3 = GUIBackgroundColor
+CommandList.Position = UDim2.new(0, GUIPadding, 0, Title.Size.Y.Offset + GUIPadding)
+CommandList.Parent = Frame
