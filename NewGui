@@ -55,14 +55,6 @@ for _, data in ipairs(commandLabels) do
     end)
 end
 
-
-local button = Instance.new("TextButton")
-button.Parent = game:GetService("CoreGui")
-button.Size = UDim2.new(0, 100, 0, 50)
-button.Position = UDim2.new(0, 50, 0, 50)
-button.Text = "open GUI"
-button.MouseButton1Click:Connect(function()
-    local script = [[
 local GUIWidth = 200
 local GUIHeight = 300
 local GUIPadding = 10
@@ -134,6 +126,11 @@ local Commands = {
 }
 
 local CommandList = Instance.new("Frame")
-CommandList.Size = U
- 
+CommandList.Size = UDim2.new(1, -2 * GUIPadding, 1, -GUIPadding - Title.Size.Y.Offset - GUIPadding - 40)
+CommandList.BackgroundColor3 = GUIBackgroundColor
+CommandList.Position = UDim2.new(0, GUIPadding, 0, Title.Size.Y.Offset + GUIPadding)
+CommandList.Parent = Frame
+
+for i, command in ipairs(Commands) do
+
  visible = true
