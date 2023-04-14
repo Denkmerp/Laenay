@@ -1,7 +1,7 @@
 COREGUI = game:GetService("CoreGui")
 
 local gui = Instance.new("ScreenGui")
-gui.Name = "MyGUI"
+gui.Name = "cmds"
 gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
@@ -55,7 +55,6 @@ for _, data in ipairs(commandLabels) do
     end)
 end
 
--- GUI Settings
 local GUIWidth = 200
 local GUIHeight = 300
 local GUIPadding = 10
@@ -64,7 +63,6 @@ local GUITextColor = Color3.fromRGB(0, 0, 0)
 local GUIBorderColor = Color3.fromRGB(0, 0, 0)
 local GUITitle = "Commands"
 
--- GUI Creation
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
 
