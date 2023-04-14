@@ -56,6 +56,13 @@ for _, data in ipairs(commandLabels) do
 end
 
 
+local button = Instance.new("TextButton")
+button.Parent = game:GetService("CoreGui")
+button.Size = UDim2.new(0, 100, 0, 50)
+button.Position = UDim2.new(0, 50, 0, 50)
+button.Text = "open GUI"
+button.MouseButton1Click:Connect(function()
+    local script = [[
 local GUIWidth = 200
 local GUIHeight = 300
 local GUIPadding = 10
@@ -92,7 +99,7 @@ Title.Parent = Frame
 
 local CloseButton = Instance.new("TextButton")
 CloseButton.Size = UDim2.new(0, 20, 0, 20)
-CloseButton.Position = UDim2.new(1, -25, 0, 5)
+CloseButton.Position = UDim2.new(1, -50, 0, 5)
 CloseButton.BackgroundColor3 = GUIBackgroundColor
 CloseButton.TextColor3 = GUITextColor
 CloseButton.Text = "X"
@@ -105,7 +112,7 @@ end)
 
 local MinimizeButton = Instance.new("TextButton")
 MinimizeButton.Size = UDim2.new(0, 20, 0, 20)
-MinimizeButton.Position = UDim2.new(1, -50, 0, 5)
+MinimizeButton.Position = UDim2.new(1, -25, 0, 5)
 MinimizeButton.BackgroundColor3 = GUIBackgroundColor
 MinimizeButton.TextColor3 = GUITextColor
 MinimizeButton.Text = "-"
@@ -127,9 +134,6 @@ local Commands = {
 }
 
 local CommandList = Instance.new("Frame")
-CommandList.Size = UDim2.new(1, -2 * GUIPadding, 1, -GUIPadding - Title.Size.Y.Offset - GUIPadding)
-CommandList.BackgroundColor3 = GUIBackgroundColor
-CommandList.Position = UDim2.new(0, GUIPadding, 0, Title.Size.Y.Offset + GUIPadding)
-CommandList.Parent = Frame
-
-visble = true
+CommandList.Size = U
+ 
+ visible = true
