@@ -47,7 +47,7 @@ for _, data in ipairs(commandLabels) do
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(0, 180, 0, 20)
     button.Position = data.label.Position
-    button.Text = ""
+    button.Text = "respawn,kill,reset"
     button.Parent = frame
     
     button.MouseButton1Click:Connect(function()
