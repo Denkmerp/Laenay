@@ -132,20 +132,3 @@ CommandList.Position = UDim2.new(0, GUIPadding, 0, Title.Size.Y.Offset + GUIPadd
 CommandList.Parent = Frame
 
  visible = true
-  end
- end
-  
-local function onChatted(message)
-    local command = string.sub(message, 2)
-    if string.lower(command) == "!kill" then
-        player.Character:BreakJoints()
-    elseif string.lower(command) == "!reset" then
-        player.Character:BreakJoints()
-        player.Character.Humanoid.Health = 0
-    elseif string.lower(command) == "!respawn" then
-        player.Character:BreakJoints()
-        player:LoadCharacter()
-    elseif string.lower(command) == "!fly" then
-        player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Flying)
-    end
-end
