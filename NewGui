@@ -132,7 +132,8 @@ CommandList.Position = UDim2.new(0, GUIPadding, 0, Title.Size.Y.Offset + GUIPadd
 CommandList.Parent = Frame
 
  visible = true
-  end)
+  end
+ end
   
 local function onChatted(message)
     local command = string.sub(message, 2)
